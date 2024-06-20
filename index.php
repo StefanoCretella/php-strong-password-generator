@@ -6,6 +6,44 @@
     <title>Generatore di Password Sicure</title>
 </head>
 <body>
-    
+    <!-- Titolo -->
+    <h1>Generatore di Password Sicure</h1>
+
+    <!-- Form per inserire la lunghezza della password -->
+    <form action="index.php" method="get">
+        <label for="length">Lunghezza Password:</label>
+        <input type="number" id="length" name="length" min="1" max="20" required>
+        <button type="submit">Genera</button>
+    </form>
+
+    <?php
+    // Verifica se è stata inviata la lunghezza della password
+    if (isset($_GET['length'])) {
+        $length = intval($_GET['length']);
+
+        // Controlla se la lunghezza è valida (tra 1 e 20 caratteri)
+        if ($length > 0 && $length <= 20) {
+            echo '<p>La tua password generata è: <strong>' . generatePassword($length) . '</strong></p>';
+        } else {
+            echo '<p>Inserisci una lunghezza valida.</p>';
+        }
+    }
+
+    // Funzione per generare una password casuale di lunghezza specificata
+    function generatePassword($length) {
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+        $password = '';
+        for ($i = 0; $i < $length; $i++) {
+            $password .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $password;
+    }
+    ?>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </body>
 </html>

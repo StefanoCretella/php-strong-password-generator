@@ -17,6 +17,9 @@
     </form>
 
     <?php
+    // Inclusione del file functions.php
+    include 'functions.php';
+
     // Verifica se è stata inviata la lunghezza della password
     if (isset($_GET['length'])) {
         $length = intval($_GET['length']);
@@ -27,16 +30,6 @@
         } else {
             echo '<p>Inserisci una lunghezza valida.</p>';
         }
-    }
-
-    // Funzione per generare una password casuale di lunghezza specificata
-    function generatePassword($length) {
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-        $password = '';
-        for ($i = 0; $i < $length; $i++) {
-            $password .= $characters[rand(0, strlen($characters) - 1)];
-        }
-        return $password;
     }
     ?>
 

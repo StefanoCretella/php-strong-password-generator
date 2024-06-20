@@ -1,5 +1,5 @@
-<!-- Funzione per generare una password casuale di lunghezza specificata -->
 <?php
+// Funzione per generare una password casuale di lunghezza specificata
 function generatePassword($length) {
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
     $password = '';

@@ -17,18 +17,30 @@
     </form>
 
     <?php
-    // Inclusione del file functions.php
-    include 'functions.php';
+    session_start(); // Avvia la sessione
 
-    // Verifica se è stata inviata la lunghezza della password
+    // Verifica se è stata inviata la lunghezza della password tramite GET
     if (isset($_GET['length'])) {
         $length = intval($_GET['length']);
 
-        // Controlla se la lunghezza è valida (tra 1 e 20 caratteri)
+        // Controlla se la lunghezza è valida (da 1 a 20 caratteri)
         if ($length > 0 && $length <= 20) {
-            echo '<p>La tua password generata è: <strong>' . generatePassword($length) . '</strong></p>';
+
+            // Includi il file functions.php
+            include 'functions.php';
+
+            // Genera la password
+            $password = generatePassword($length);
+
+            // Salva la password nella sessione
+            $_SESSION['generated_password'] = $password;
+
+            // Redirect alla pagina che mostrerà la password generata
+            header('Location: show_password.php');
+            exit;
         } else {
-            echo '<p>Inserisci una lunghezza valida.</p>';
+            // Messaggio di errore se la lunghezza non è valida
+            echo '<p>Inserisci una lunghezza valida (da 1 a 20).</p>';
         }
     }
     ?>
